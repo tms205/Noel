@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merry Christmas Ngân ❤️</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&family=Mountains+of+Christmas:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --christmas-red: #e63946;
+        --christmas-green: #2a9d8f;
+        --christmas-gold: #ffd166;
+        --dark-blue: #1d3557;
+        --light-blue: #a8dadc;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #0a2e38 0%, #1a0b2e 100%);
+        color: #fff;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Hiệu ứng nền Noel */
+      .noel-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .snowflakes {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .snowflake {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.8;
+      }
+
+      .christmas-icons {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .christmas-icon {
+        position: absolute;
+        font-size: 2rem;
+        color: var(--christmas-red);
+        opacity: 0.6;
+      }
+
+      /* Container chính */
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        padding: 40px 0 30px;
+        animation: fadeIn 1.5s ease-out;
+      }
+
+      .merry-christmas {
+        font-family: "Mountains of Christmas", cursive;
+        font-size: 4.5rem;
+        color: var(--christmas-red);
+        text-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+        margin-bottom: 10px;
+        animation: glow 3s infinite alternate;
+      }
+
+      .to-ngan {
+        font-family: "Dancing Script", cursive;
+        font-size: 3.2rem;
+        color: var(--christmas-gold);
+        margin-bottom: 20px;
+      }
+
+      .subtitle {
+        font-size: 1.5rem;
+        color: var(--light-blue);
+        font-weight: 300;
+      }
+
+      /* Content chính */
+      .main-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+        margin: 30px 0;
+        animation: slideUp 1s ease-out;
+      }
+
+      .heart-section {
+        flex: 1;
+        min-width: 300px;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .heart-container {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        margin-bottom: 30px;
+      }
+
+      .main-heart {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 8rem;
+        color: var(--christmas-red);
+        filter: drop-shadow(0 0 20px rgba(230, 57, 70, 0.7));
+        animation: heartbeat 1.5s infinite;
+        cursor: pointer;
+        transition: transform 0.3s;
+        z-index: 2;
+      }
+
+      .main-heart:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+
+      .heart-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(
+          circle,
+          var(--christmas-red) 0%,
+          transparent 70%
+        );
+        opacity: 0.3;
+        filter: blur(30px);
+        animation: pulse 3s infinite alternate;
+      }
+
+      .message-section {
+        flex: 1;
+        min-width: 300px;
+        max-width: 500px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .message-title {
+        font-family: "Dancing Script", cursive;
+        font-size: 2.5rem;
+        color: var(--christmas-gold);
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .message-content {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        text-align: justify;
+      }
+
+      .highlight {
+        color: var(--christmas-red);
+        font-weight: 600;
+      }
+
+      .signature {
+        text-align: right;
+        font-style: italic;
+        color: var(--light-blue);
+        margin-top: 20px;
+        font-family: "Dancing Script", cursive;
+        font-size: 1.5rem;
+      }
+
+      /* Nút bí mật */
+      .secret-section {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .secret-btn {
+        padding: 15px 40px;
+        background: linear-gradient(135deg, var(--christmas-red), #ff6b8b);
+        border: none;
+        color: white;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .secret-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(230, 57, 70, 0.4);
+      }
+
+      /* Modal bí mật nhỏ */
+      .secret-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.3s;
+      }
+
+      .secret-modal-content {
+        background: linear-gradient(135deg, #1a0b2e 0%, #0a2e38 100%);
+        padding: 30px;
+        border-radius: 20px;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        border: 2px solid var(--christmas-red);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        animation: modalIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+      }
+
+      .close-secret-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 1.5rem;
+        color: white;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .close-secret-modal:hover {
+        color: var(--christmas-red);
+      }
+
+      .secret-modal-title {
+        font-family: "Dancing Script", cursive;
+        font-size: 2.5rem;
+        color: var(--christmas-gold);
+        margin-bottom: 20px;
+      }
+
+      .secret-modal-message {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        color: #eee;
+      }
+
+      .secret-modal-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+      }
+
+      .secret-choice-btn {
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+        min-width: 130px;
+      }
+
+      .yes-btn {
+        background: linear-gradient(135deg, #2a9d8f, #4ecdc4);
+        color: white;
+        box-shadow: 0 8px 15px rgba(42, 157, 143, 0.3);
+      }
+
+      .yes-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 20px rgba(42, 157, 143, 0.4);
+      }
+
+      .no-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .no-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-3px);
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding: 30px 0 20px;
+        margin-top: 30px;
+        color: var(--light-blue);
+        font-size: 0.9rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Hiệu ứng trái tim bay */
+      .hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .heart {
+        position: absolute;
+        color: var(--christmas-red);
+        font-size: 20px;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Loading spinner */
+      .loading-spinner {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--christmas-red);
+        animation: spin 1s ease-in-out infinite;
+        margin-bottom: 20px;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+        }
+        100% {
+          text-shadow: 0 0 30px rgba(230, 57, 70, 0.8),
+            0 0 40px rgba(255, 209, 102, 0.4);
+        }
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        5% {
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+        10% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        15% {
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+        20% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 0.2;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          opacity: 0.4;
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+      }
+
+      @keyframes modalIn {
+        0% {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-10px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      @keyframes heartFloat {
+        0% {
+          transform: translateY(0) scale(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) scale(1);
+          opacity: 0;
+        }
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .merry-christmas {
+          font-size: 3.5rem;
+        }
+        .to-ngan {
+          font-size: 2.5rem;
+        }
+        .subtitle {
+          font-size: 1.2rem;
+        }
+        .main-content {
+          flex-direction: column;
+          align-items: center;
+        }
+        .heart-container {
+          width: 200px;
+          height: 200px;
+        }
+        .main-heart {
+          font-size: 6rem;
+        }
+        .message-section {
+          max-width: 100%;
+        }
+        .secret-modal-actions {
+          flex-direction: column;
+        }
+        .secret-choice-btn {
+          min-width: 100%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .merry-christmas {
+          font-size: 2.8rem;
+        }
+        .to-ngan {
+          font-size: 2rem;
+        }
+        .message-section {
+          padding: 20px;
+        }
+        .secret-modal-content {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Nền Noel với icon Giáng Sinh -->
+    <div class="noel-background">
+      <div class="snowflakes" id="snowflakes"></div>
+      <div class="christmas-icons" id="christmasIcons"></div>
+    </div>
+
+    <!-- Hiệu ứng trái tim bay -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Loading spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+      <div class="spinner"></div>
+      <p>Đang gửi thông báo đến Telegram...</p>
+    </div>
+
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="merry-christmas">Merry Christmas</h1>
+        <h2 class="to-ngan">Gửi Ngân yêu dấu</h2>
+        <p class="subtitle">
+          Chúc em một mùa Giáng Sinh thật ấm áp và hạnh phúc ❤️
+        </p>
+      </header>
+
+      <!-- Content chính -->
+      <div class="main-content">
+        <div class="heart-section">
+          <div class="heart-container">
+            <div class="heart-glow"></div>
+            <div class="main-heart" id="mainHeart">
+              <i class="fas fa-heart"></i>
+            </div>
+          </div>
+          <p
+            style="
+              text-align: center;
+              color: var(--light-blue);
+              margin-top: 20px;
+            "
+          >
+            <i class="fas fa-music"></i> Nhạc đang tự động phát...
+          </p>
+        </div>
+
+        <div class="message-section">
+          <h3 class="message-title">Lời chúc từ anh</h3>
+          <div class="message-content">
+            <p>Chào <span class="highlight">Ngân</span>,</p>
+            <p>
+              Giáng Sinh lại về, mang theo không khí ấm áp và những điều kỳ
+              diệu. Anh muốn nhân dịp này gửi đến em những lời chúc tốt đẹp
+              nhất.
+            </p>
+            <p>
+              Em là cô gái đặc biệt trong mắt anh - thông minh, dịu dàng và luôn
+              tỏa sáng. Đôi lúc anh làm em buồn nhiều nhưng anh luôn mong em
+              hiểu rằng anh thương em nhiều lắm.
+            </p>
+            <p>
+              Anh mong em có một mùa Giáng Sinh thật ý nghĩa, được nhận nhiều
+              quà và quan trọng nhất là luôn giữ được nụ cười tươi tắn ấy.
+            </p>
+            <p>
+              Dù chúng ta mới quen biết nhau, nhưng anh rất trân trọng những
+              khoảnh khắc này. Hy vọng chúng ta sẽ có nhiều thời gian để hiểu
+              nhau hơn.
+            </p>
+          </div>
+          <p class="signature">- Từ anh, người luôn nghĩ về em -</p>
+        </div>
+      </div>
+
+      <!-- Nút bí mật -->
+      <div class="secret-section">
+        <button class="secret-btn" id="secretBtn">
+          <i class="fas fa-gift"></i>
+          Mở quà bí mật
+        </button>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>Mờ Mạnh tới hẹ hẹ hẹ</p>
+        <p>Thương mờ Ngân lắm luôn</p>
+      </div>
+    </div>
+
+    <!-- Modal bí mật nhỏ -->
+    <div class="secret-modal" id="secretModal">
+      <div class="secret-modal-content">
+        <span class="close-secret-modal" id="closeSecretModal">&times;</span>
+        <h3 class="secret-modal-title">Điều đặc biệt...</h3>
+        <div class="secret-modal-message">
+          <p>Em thân mến,</p>
+          <p>
+            Anh có điều muốn hỏi em... Đã từ lâu, anh luôn nghĩ về em với một
+            tình cảm đặc biệt.
+          </p>
+          <p>
+            Em có thể cho anh cơ hội được tìm hiểu em nhiều hơn, được ở bên em
+            nhiều hơn không?
+          </p>
+        </div>
+        <div class="secret-modal-actions">
+          <button class="secret-choice-btn yes-btn" id="yesBtn">
+            <i class="fas fa-heart"></i> Có
+          </button>
+          <button class="secret-choice-btn no-btn" id="noBtn">
+            <i class="fas fa-times"></i> Không
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audio với nhạc cứng -->
+    <audio id="christmasMusic" autoplay loop>
+      <source src="m.mp3" type="audio/mpeg" />
+      <source
+        src="https://assets.mixkit.co/music/preview/mixkit-christmas-is-coming-1145.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <script>
+      // ========== CẤU HÌNH TELEGRAM BOT (ĐÃ NHẬP ĐẦY ĐỦ) ==========
+      const TELEGRAM_BOT_TOKEN =
+        "8376530003:AAGGIr_pFUrsWFz9pH-DShwm_CbC9hRcWvk";
+      const TELEGRAM_CHAT_ID = "6393471651";
+      const TELEGRAM_USERNAME = "@tms276205_vna";
+      const USER_FULL_NAME = "NGUYEN TRONG MANH";
+      const USER_LANGUAGE = "vi";
+
+      // ========== KHAI BÁO BIẾN ==========
+      const mainHeart = document.getElementById("mainHeart");
+      const secretBtn = document.getElementById("secretBtn");
+      const secretModal = document.getElementById("secretModal");
+      const closeSecretModal = document.getElementById("closeSecretModal");
+      const yesBtn = document.getElementById("yesBtn");
+      const noBtn = document.getElementById("noBtn");
+      const christmasMusic = document.getElementById("christmasMusic");
+      const loadingSpinner = document.getElementById("loadingSpinner");
+
+      // ========== TẠO HIỆU ỨNG NỀN ==========
+      function createSnowflakes() {
+        const snowflakesContainer = document.getElementById("snowflakes");
+        const snowflakeCount = 80;
+
+        for (let i = 0; i < snowflakeCount; i++) {
+          const snowflake = document.createElement("div");
+          snowflake.classList.add("snowflake");
+
+          const size = Math.random() * 5 + 3;
+          snowflake.style.width = `${size}px`;
+          snowflake.style.height = `${size}px`;
+
+          snowflake.style.left = `${Math.random() * 100}%`;
+
+          const duration = Math.random() * 5 + 5;
+          snowflake.style.animation = `fall ${duration}s linear infinite`;
+          snowflake.style.animationDelay = `${Math.random() * 5}s`;
+
+          snowflakesContainer.appendChild(snowflake);
+        }
+      }
+
+      function createChristmasIcons() {
+        const iconsContainer = document.getElementById("christmasIcons");
+        const icons = [
+          "tree",
+          "star",
+          "gift",
+          "snowflake",
+          "candy-cane",
+          "bell",
+          "sleigh",
+          "holly-berry",
+        ];
+        const iconCount = 15;
+
+        for (let i = 0; i < iconCount; i++) {
+          const icon = document.createElement("div");
+          icon.classList.add("christmas-icon");
+          icon.innerHTML = `<i class="fas fa-${
+            icons[Math.floor(Math.random() * icons.length)]
+          }"></i>`;
+
+          const size = Math.random() * 30 + 20;
+          icon.style.fontSize = `${size}px`;
+
+          icon.style.left = `${Math.random() * 100}%`;
+          icon.style.top = `${Math.random() * 100}%`;
+
+          const colors = ["#e63946", "#2a9d8f", "#ffd166", "#a8dadc"];
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          icon.style.color = color;
+
+          icon.style.opacity = Math.random() * 0.4 + 0.2;
+
+          const duration = Math.random() * 10 + 10;
+          const delay = Math.random() * 5;
+          icon.style.animation = `float ${duration}s infinite ease-in-out ${delay}s`;
+
+          iconsContainer.appendChild(icon);
+        }
+      }
+
+      function createHearts(count = 10) {
+        const heartsContainer = document.getElementById("hearts");
+
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = '<i class="fas fa-heart"></i>';
+
+            const size = Math.random() * 25 + 15;
+            heart.style.fontSize = `${size}px`;
+
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.top = `100%`;
+
+            const colors = ["#e63946", "#ff6b8b", "#ffd166", "#a8dadc"];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            heart.style.color = color;
+
+            const duration = Math.random() * 3 + 2;
+            const xMovement = Math.random() * 100 - 50;
+
+            heart.style.animation = `heartFloat ${duration}s linear forwards`;
+            heart.style.transform = `translateX(${xMovement}px)`;
+
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+              heart.remove();
+            }, duration * 1000);
+          }, i * 200);
+        }
+      }
+
+      // ========== GỬI THÔNG BÁO BẰNG TELEGRAM BOT ==========
+      function showLoading() {
+        loadingSpinner.style.display = "flex";
+      }
+
+      function hideLoading() {
+        loadingSpinner.style.display = "none";
+      }
+
+      async function sendTelegramNotification(choice) {
+        showLoading();
+        console.log("🟡 Bắt đầu gửi Telegram...");
+
+        try {
+          const choiceText = choice === "yes" ? "CÓ ❤️" : "KHÔNG 😊";
+          const message = `🎄 THÔNG BÁO TỪ TRANG NOEL CHO NGÂN 🎄
+
+Người gửi: NGUYEN TRONG MANH (@tms276205_vna)
+
+Kết quả: ${choiceText}
+
+Thời gian: ${new Date().toLocaleString("vi-VN")}
+Trạng thái: Đã mở quà bí mật và đưa ra quyết định
+
+💌 Chúc mừng Giáng Sinh!`;
+
+          const response = await fetch(
+            `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                // ĐÃ XÓA parse_mode: 'Markdown' - nguyên nhân gây lỗi
+              }),
+            }
+          );
+
+          const result = await response.json();
+          console.log("✅ Kết quả từ Telegram:", result);
+          hideLoading();
+
+          if (result.ok) {
+            return {
+              success: true,
+              message: "✅ Đã gửi thông báo đến Telegram thành công!",
+            };
+          } else {
+            console.error("❌ Lỗi Telegram:", result);
+            return {
+              success: false,
+              message: `❌ Lỗi: ${result.description || "Vui lòng thử lại"}`,
+            };
+          }
+        } catch (error) {
+          console.error("❌ Lỗi kết nối:", error);
+          hideLoading();
+          return {
+            success: false,
+            message: "❌ Lỗi kết nối!",
+          };
+        }
+      }
+
+      // ========== XỬ LÝ SỰ KIỆN ==========
+      mainHeart.addEventListener("click", function () {
+        createHearts(8);
+        mainHeart.style.animation = "none";
+        setTimeout(() => {
+          mainHeart.style.animation = "heartbeat 1.5s infinite";
+        }, 10);
+      });
+
+      secretBtn.addEventListener("click", function () {
+        secretModal.style.display = "flex";
+        createHearts(5);
+      });
+
+      closeSecretModal.addEventListener("click", function () {
+        secretModal.style.display = "none";
+      });
+
+      // Nút Có - ĐÃ CẬP NHẬT VỚI TELEGRAM
+      yesBtn.addEventListener("click", async function () {
+        const result = await sendTelegramNotification("yes");
+
+        alert(
+          result.success
+            ? `❤️ Cảm ơn em! ${result.message}\n${result.telegramInfo || ""}`
+            : "❤️ Cảm ơn em! Anh biết em đã đồng ý!"
+        );
+
+        secretModal.style.display = "none";
+
+        createHearts(20);
+        secretBtn.innerHTML = '<i class="fas fa-heart"></i> Em đã chọn CÓ!';
+        secretBtn.style.background =
+          "linear-gradient(135deg, #2a9d8f, #4ecdc4)";
+        secretBtn.disabled = true;
+      });
+
+      // Nút Không - ĐÃ CẬP NHẬT VỚI TELEGRAM
+      noBtn.addEventListener("click", async function () {
+        const result = await sendTelegramNotification("no");
+
+        alert(
+          result.success
+            ? `😊 Anh hiểu và tôn trọng quyết định của em. ${result.message}`
+            : "😊 Anh hiểu và tôn trọng quyết định của em."
+        );
+
+        secretModal.style.display = "none";
+
+        secretBtn.innerHTML = '<i class="fas fa-gift"></i> Em đã trả lời';
+        secretBtn.disabled = true;
+      });
+
+      window.addEventListener("click", function (event) {
+        if (event.target === secretModal) {
+          secretModal.style.display = "none";
+        }
+      });
+
+      // ========== KHỞI TẠO ==========
+      document.addEventListener("DOMContentLoaded", function () {
+        createSnowflakes();
+        createChristmasIcons();
+
+        setTimeout(() => {
+          createHearts(5);
+        }, 1000);
+
+        christmasMusic.volume = 0.5;
+        const playMusic = () => {
+          christmasMusic.play().catch((e) => {
+            console.log("Cần tương tác để phát nhạc");
+          });
+        };
+
+        playMusic();
+        setTimeout(playMusic, 1000);
+
+        document.addEventListener(
+          "click",
+          function () {
+            if (christmasMusic.paused) {
+              christmasMusic.play();
+            }
+          },
+          { once: true }
+        );
+
+        setTimeout(() => {
+          if (secretModal.style.display !== "flex") {
+            secretBtn.click();
+          }
+        }, 15000);
+
+        // Kiểm tra cấu hình Telegram
+        console.log("🤖 Telegram Bot đã sẵn sàng!");
+        console.log("👤 Người nhận:", USER_FULL_NAME);
+        console.log("📱 Username:", TELEGRAM_USERNAME);
+        console.log("💬 Chat ID:", TELEGRAM_CHAT_ID);
+        console.log(
+          "🔐 Token (đã ẩn):",
+          TELEGRAM_BOT_TOKEN.substring(0, 10) + "..."
+        );
+      });
+    </script>
+  </body>
+</html>
