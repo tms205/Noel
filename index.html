@@ -29,7 +29,8 @@
         --tet-yellow: #ffd700;
         --tet-light: #fff8e1;
         --tet-dark: #1a1a2e;
-        --tet-horse: #b8860b; /* Màu nâu vàng cho năm Ngọ */
+        --tet-horse: #b8860b;
+        --tet-special: #ff1493; /* Màu hồng đậm cho bao đặc biệt */
       }
 
       body {
@@ -256,6 +257,10 @@
         justify-content: center;
       }
 
+      /* Bao đặc biệt 500k */
+      
+      
+
       .lixi-item:hover:not(.disabled) {
         transform: translateY(-10px) scale(1.05);
         box-shadow: 0 20px 40px rgba(255, 215, 0, 0.5);
@@ -301,6 +306,8 @@
         animation: shake 2s infinite;
       }
 
+     
+
       /* ẨN MỆNH GIÁ HOÀN TOÀN */
       .lixi-value {
         display: none;
@@ -314,6 +321,11 @@
         padding: 5px 15px;
         border-radius: 30px;
         backdrop-filter: blur(5px);
+      }
+
+      .lixi-item.special .lixi-label {
+        color: white;
+        background: rgba(255, 255, 255, 0.2);
       }
 
       .lixi-tag {
@@ -374,6 +386,11 @@
         display: none;
         animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         min-width: 300px;
+      }
+
+      .result-modal.special-result {
+        background: linear-gradient(135deg, #ff1493, #ff6eb4);
+        box-shadow: 0 0 100px #ff1493;
       }
 
       .result-modal.show {
@@ -486,6 +503,7 @@
         50% { transform: scale(1.02); }
       }
 
+      
       @keyframes shake {
         0%, 100% { transform: rotate(0deg); }
         25% { transform: rotate(5deg); }
@@ -535,6 +553,37 @@
         100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
       }
 
+      /* Nút điều khiển nhạc */
+      .music-control {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--tet-gold), var(--tet-orange));
+        border: 2px solid white;
+        color: var(--tet-red);
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s;
+      }
+
+      .music-control:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+      }
+
+      .music-control.muted {
+        background: linear-gradient(135deg, #999, #666);
+        color: white;
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         .chuc-tet { font-size: 3.5rem; }
@@ -569,6 +618,11 @@
       <div class="result-message" id="resultMessage">Chúc mừng bạn!</div>
       <div class="result-value" id="resultValue"></div>
       <button class="close-result" id="closeResult">Đóng</button>
+    </div>
+
+    <!-- Nút điều khiển nhạc -->
+    <div class="music-control" id="musicControl">
+      <i class="fas fa-music"></i>
     </div>
 
     <div class="container">
@@ -621,7 +675,7 @@
       <!-- Khu vực lì xì -->
       <div class="lixi-section">
         <h2 class="lixi-title">🧧 LÌ XÌ MAY MẮN 2026 🧧</h2>
-        <p class="lixi-subtitle">13 phong bì bí mật - Chọn một phong bì, mệnh giá sẽ bất ngờ khi mở</p>
+        <p class="lixi-subtitle">Chọn một phong bì - Mệnh giá sẽ bất ngờ khi mở</p>
         
         <div class="lixi-container" id="lixiContainer"></div>
 
@@ -643,9 +697,9 @@
       </div>
     </div>
 
-    <!-- Audio nhạc Tết -->
-    <audio id="tetMusic" loop>
-      <source src="https://assets.mixkit.co/music/preview/mixkit-happy-new-year-983.mp3" type="audio/mpeg">
+    <!-- Audio nhạc Tết - SỬ DỤNG FILE m.mp3 -->
+    <audio id="tetMusic" loop preload="auto">
+      <source src="m.mp3" type="audio/mpeg">
     </audio>
 
     <script>
@@ -653,11 +707,9 @@
       const TELEGRAM_BOT_TOKEN = "8376530003:AAGGIr_pFUrsWFz9pH-DShwm_CbC9hRcWvk";
       const TELEGRAM_CHAT_ID = "6393471651";
 
-      // ========== DỮ LIỆU LÌ XÌ (GIỮ NGUYÊN 13 CÁI NHƯ BAN ĐẦU) ==========
+      // ========== DỮ LIỆU LÌ XÌ (ĐÃ ĐIỀU CHỈNH SỐ LƯỢNG) ==========
       const lixiData = [
-        // 5 cái 50k
-        { value: "50,000đ", amount: 50000, type: "Lộc nhỏ - Ngựa non" },
-        { value: "50,000đ", amount: 50000, type: "Lộc nhỏ - Ngựa non" },
+        // 3 cái 50k
         { value: "50,000đ", amount: 50000, type: "Lộc nhỏ - Ngựa non" },
         { value: "50,000đ", amount: 50000, type: "Lộc nhỏ - Ngựa non" },
         { value: "50,000đ", amount: 50000, type: "Lộc nhỏ - Ngựa non" },
@@ -667,10 +719,13 @@
         { value: "100,000đ", amount: 100000, type: "Lộc vừa - Ngựa vàng" },
         { value: "100,000đ", amount: 100000, type: "Lộc vừa - Ngựa vàng" },
         { value: "100,000đ", amount: 100000, type: "Lộc vừa - Ngựa vàng" },
-        // 3 cái 200k
+        // 4 cái 200k
         { value: "200,000đ", amount: 200000, type: "Lộc lớn - Thiên mã" },
         { value: "200,000đ", amount: 200000, type: "Lộc lớn - Thiên mã" },
-        { value: "200,000đ", amount: 200000, type: "Lộc lớn - Thiên mã" }
+        { value: "200,000đ", amount: 200000, type: "Lộc lớn - Thiên mã" },
+        { value: "200,000đ", amount: 200000, type: "Lộc lớn - Thiên mã" },
+        // 1 cái đặc biệt 500k
+        { value: "500,000đ", amount: 500000, type: "ĐẶC BIỆT - Thần Mã"}
       ];
 
       // Xáo trộn mảng để random
@@ -678,6 +733,10 @@
 
       let selectedLixiIndex = null;
       let remainingLixi = [...Array(shuffledLixi.length).keys()]; // Mảng index còn lại
+
+      // Biến điều khiển nhạc
+      let isMusicPlaying = false;
+      let music = document.getElementById("tetMusic");
 
       // ========== TẠO HIỆU ỨNG NỀN ==========
       function createTetBackground() {
@@ -719,8 +778,16 @@
       }
 
       // ========== HIỆU ỨNG MỞ LÌ XÌ ==========
-      function createOpenEffect() {
-        for (let i = 0; i < 30; i++) {
+      function createOpenEffect(isSpecial = false) {
+        const symbols = isSpecial ? 
+          ['🧧', '💰', '🎋', '🌸', '🍊', '🧨', '🎊', '🐴', '💎', '👑', '✨', '🌟'] : 
+          ['🧧', '💰', '🎋', '🌸', '🍊', '🧨', '🎊', '🐴'];
+        
+        const colors = isSpecial ?
+          ['#ffd700', '#ff1493', '#ff0000', '#ff8c00', '#ff69b4'] :
+          ['#ffd700', '#ff0000', '#ff8c00'];
+
+        for (let i = 0; i < (isSpecial ? 50 : 30); i++) {
           setTimeout(() => {
             const effect = document.createElement("div");
             effect.style.position = "fixed";
@@ -729,8 +796,8 @@
             effect.style.fontSize = (Math.random() * 40 + 20) + "px";
             effect.style.zIndex = "1999";
             effect.style.animation = `coinRain ${Math.random() * 2 + 1}s linear forwards`;
-            effect.innerHTML = ['🧧', '💰', '🎋', '🌸', '🍊', '🧨', '🎊', '🐴'][Math.floor(Math.random() * 8)];
-            effect.style.color = ['#ffd700', '#ff0000', '#ff8c00'][Math.floor(Math.random() * 3)];
+            effect.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            effect.style.color = colors[Math.floor(Math.random() * colors.length)];
             document.body.appendChild(effect);
             
             setTimeout(() => effect.remove(), 2000);
@@ -746,6 +813,7 @@
         shuffledLixi.forEach((item, index) => {
           const lixiItem = document.createElement("div");
           lixiItem.classList.add("lixi-item");
+          
           if (!remainingLixi.includes(index)) {
             lixiItem.classList.add("disabled");
           }
@@ -812,26 +880,32 @@
       }
 
       // ========== HIỂN THỊ KẾT QUẢ ==========
-      function showResult(value, type) {
+      function showResult(value, type, isSpecial = false) {
         const modal = document.getElementById("resultModal");
         const resultValue = document.getElementById("resultValue");
         const resultMessage = document.getElementById("resultMessage");
         
         resultValue.textContent = value;
         
-        if (type.includes("Lộc nhỏ")) {
-          resultMessage.textContent = "🐴 Chúc mừng! Bạn nhận được Lộc Ngựa Non!";
-        } else if (type.includes("Lộc vừa")) {
-          resultMessage.textContent = "🐴 Tuyệt vời! Bạn nhận được Lộc Ngựa Vàng!";
-        } else if (type.includes("Lộc lớn")) {
-          resultMessage.textContent = "🐴 WOW! Bạn nhận được Lộc Thiên Mã!";
+        if (isSpecial) {
+          resultMessage.textContent = "🎉 CHÚC MỪNG ĐẶC BIỆT! Bạn nhận được Lộc Thần Mã 500k! 🎉";
+          modal.classList.add("special-result");
+        } else {
+          modal.classList.remove("special-result");
+          if (type.includes("Lộc nhỏ")) {
+            resultMessage.textContent = "🐴 Chúc mừng! Bạn nhận được Lộc Ngựa Non!";
+          } else if (type.includes("Lộc vừa")) {
+            resultMessage.textContent = "🐴 Tuyệt vời! Bạn nhận được Lộc Ngựa Vàng!";
+          } else if (type.includes("Lộc lớn")) {
+            resultMessage.textContent = "🐴 WOW! Bạn nhận được Lộc Thiên Mã!";
+          }
         }
         
         modal.classList.add("show");
         
         setTimeout(() => {
           modal.classList.remove("show");
-        }, 4000);
+        }, 5000);
       }
 
       // ========== GỬI THÔNG BÁO TELEGRAM ==========
@@ -921,20 +995,21 @@ Mã đáo thành công - Vạn sự như ý - An khang thịnh vượng`;
 
         // Hiệu ứng và hiển thị kết quả
         createOpenEffect();
-        showResult(selectedLixi.value, selectedLixi.type);
+        showResult(selectedLixi.value, selectedLixi.type, selectedLixi.special);
 
         // Phát âm thanh mừng
         const audio = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3");
+        audio.volume = 0.5;
         audio.play().catch(e => console.log("Không thể phát âm thanh"));
 
         if (result.success) {
           showMessage(
-            `🐴 Chúc mừng ${userName}! Bạn đã nhận được ${selectedLixi.value}. Thông tin đã được ghi nhận!`,
+            `🎉 Chúc mừng ${userName}! Bạn đã nhận được ${selectedLixi.value}. Thông tin đã được ghi nhận!`,
             "success"
           );
         } else {
           showMessage(
-            `🐴 Chúc mừng ${userName}! Bạn đã nhận được ${selectedLixi.value}.`,
+            `🎉 Chúc mừng ${userName}! Bạn đã nhận được ${selectedLixi.value}.`,
             "success"
           );
         }
@@ -946,43 +1021,78 @@ Mã đáo thành công - Vạn sự như ý - An khang thịnh vượng`;
         // Nếu hết lì xì
         if (remainingLixi.length === 0) {
           setTimeout(() => {
-            showMessage("🎊 Chúc mừng! Đã hết 13 phong bì lì xì. Hẹn gặp lại Tết 2027!", "success");
+            showMessage("🎊 Chúc mừng! Đã hết lì xì. Hẹn gặp lại Tết 2027!", "success");
           }, 2000);
         }
+      }
+
+      // ========== ĐIỀU KHIỂN NHẠC ==========
+      function initMusic() {
+        const musicControl = document.getElementById("musicControl");
+        
+        music.volume = 0.3;
+        
+        function tryPlayMusic() {
+          music.play()
+            .then(() => {
+              isMusicPlaying = true;
+              musicControl.innerHTML = '<i class="fas fa-music"></i>';
+              console.log("✅ Đang phát nhạc từ file m.mp3");
+            })
+            .catch(e => {
+              console.log("❌ Không thể phát nhạc:", e);
+              musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+              musicControl.classList.add("muted");
+            });
+        }
+
+        musicControl.addEventListener("click", function() {
+          if (isMusicPlaying) {
+            music.pause();
+            isMusicPlaying = false;
+            musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            musicControl.classList.add("muted");
+          } else {
+            tryPlayMusic();
+          }
+        });
+
+        // Tự động phát khi tương tác với trang
+        document.addEventListener("click", function once() {
+          if (!isMusicPlaying) {
+            tryPlayMusic();
+          }
+          document.removeEventListener("click", once);
+        }, { once: true });
+
+        setTimeout(() => {
+          if (!isMusicPlaying) {
+            tryPlayMusic();
+          }
+        }, 1000);
       }
 
       // ========== KHỞI TẠO ==========
       document.addEventListener("DOMContentLoaded", function() {
         createTetBackground();
         renderLixi();
+        initMusic();
 
-        // Xử lý nút nhận
         document.getElementById("receiveBtn").addEventListener("click", handleReceiveLixi);
         
-        // Đóng modal kết quả
         document.getElementById("closeResult").addEventListener("click", () => {
           document.getElementById("resultModal").classList.remove("show");
         });
 
-        // Phát nhạc nền
-        const music = document.getElementById("tetMusic");
-        music.volume = 0.3;
-        
-        const playMusic = () => {
-          music.play().catch(e => console.log("Cần tương tác để phát nhạc"));
-        };
-
-        playMusic();
-        
-        document.addEventListener("click", function once() {
-          if (music.paused) {
-            music.play();
+        window.addEventListener("click", (event) => {
+          const modal = document.getElementById("resultModal");
+          if (event.target === modal) {
+            modal.classList.remove("show");
           }
-          document.removeEventListener("click", once);
         });
 
-        console.log("🧧 Trang lì xì Tết Bính Ngọ 2026 - 13 phong bì ẩn mệnh giá");
-        console.log(`📊 Tổng số: ${shuffledLixi.length} phong bì (5x50k, 5x100k, 3x200k)`);
+        console.log("🧧 Trang lì xì Tết Bính Ngọ 2026");
+        console.log(`📊 Tổng số: ${shuffledLixi.length} phong bì (3x50k, 5x100k, 4x200k, 1x500k đặc biệt)`);
       });
     </script>
   </body>
